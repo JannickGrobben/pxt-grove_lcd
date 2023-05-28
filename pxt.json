@@ -2,9 +2,7 @@
     "name": "pxt-grove_lcd",
     "description": "",
     "dependencies": {
-        "core": "*",
-        "radio": "*",
-        "microphone": "*"
+        "core": "*"
     },
     "files": [
         "main.ts",
