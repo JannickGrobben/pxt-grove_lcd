@@ -1,6 +1,9 @@
 namespace grove_lcd {
     const chipAdress = 0x3E
 
+    const LCD_CLEARDISPLAY = 0x01
+
+
     function command(cmd: number) {
         let buf = pins.createBuffer(2)
         buf[0] = 0x80
@@ -41,6 +44,12 @@ namespace grove_lcd {
         for (let i = 0; i < text.length; i++) {
             charPrint(text.charCodeAt(i))
         }
+    }
+
+    //% block="Clear"
+    function clear() {
+        command(LCD_CLEARDISPLAY)
+        basic.pause(2)
     }
 
 }
