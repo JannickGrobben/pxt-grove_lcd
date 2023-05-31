@@ -47,7 +47,7 @@ namespace grove_lcd {
     }
 
     //% block="Clear"
-    function clear() {
+    export function clear() {
         command(LCD_CLEARDISPLAY)
         basic.pause(2)
     }
