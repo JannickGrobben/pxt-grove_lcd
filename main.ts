@@ -15,14 +15,6 @@ namespace grove_lcd {
         pins.i2cWriteBuffer(chipAdress, buf, false)
     }
 
-    function charPrint2(char: number) {
-        let buf = pins.createBuffer(2)
-        buf[0] = 0x40
-        buf[1] = char
-        pins.i2cWriteBuffer(chipAdress, buf, false)
-    }
-
-
     //% block="Init display"
     export function init() {
         command(0b00111100);
@@ -31,19 +23,12 @@ namespace grove_lcd {
         command(0b00000111);
     }
 
-    //% block="Test display"
-    export function test() {
-        charPrint(0x68);
-        charPrint(0x65);
-        charPrint(0x6C);
-    }
-
-    //% block="text = $text"
-    export function printText(text: string) {
-        for (let i = 0; i < text.length; i++) {
-            charPrint2(text.charCodeAt(i))
-        }
-    }
+    // //% block="text = $text"
+    // export function printText(text: string) {
+    //     for (let i = 0; i < text.length; i++) {
+    //         charPrint(text.charCodeAt(i))
+    //     }
+    // }
 
     //% block="text = $text on X = $x Y = $y"
     export function printTextXY(text: string, x: number, y: number) {
@@ -54,17 +39,8 @@ namespace grove_lcd {
         pins.i2cWriteBuffer(chipAdress, buf, false)
 
         for (let i = 0; i < text.length; i++) {
-            charPrint2(text.charCodeAt(i))
+            charPrint(text.charCodeAt(i))
         }
     }
 
 }
-
-// x = (y == 0 ? x | 0x80 : x | 0xc0);
-// let buf = pins.createBuffer(2)
-// buf[0] = 0x40
-// buf[1] = x
-// pins.i2cWriteBuffer(chipAdress, buf, false)
-
-//col = (row == 0 ? col | 0x80 : col | 0xc0);
-//unsigned char dta[2] = { 0x80, col };
