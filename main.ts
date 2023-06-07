@@ -30,7 +30,8 @@ namespace grove_lcd {
     }
 
     //% block="Blink On"
-    export function BlinkOn() {
+    //% on.shadow="toggleOnOff"
+    export function BlinkOn(on : boolean) {
         command((LCD_DISPLAYCONTROL | LCD_BLINKON))
         basic.pause(1)
     }
@@ -53,13 +54,17 @@ namespace grove_lcd {
         basic.pause(1)
     }
 
+    //% weight=80
     //% block="Clear"
     export function clear() {
         command(LCD_CLEARDISPLAY)
         basic.pause(2)
     }
 
+    //% weight=90
     //% block="text = $text on X = $x Y = $y"
+    //% x.min=0 x.max=16
+    //% y.min=0 y.max=1
     export function printTextXY(text: string, x: number, y: number) {
         x = (y == 0 ? x | 0x80 : x | 0xc0);
         let buf = pins.createBuffer(2)
@@ -73,6 +78,7 @@ namespace grove_lcd {
     }
 
     //% block="Init display"
+    //% weight=100
     export function init() {
         command(LCD_FUNCTIONSET);       //Function set
         command(LCD_DISPLAYCONTROL);    //On/Off control
@@ -89,3 +95,4 @@ namespace grove_lcd {
     // }
 
 }
+
